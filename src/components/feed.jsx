@@ -4,7 +4,6 @@ import { getPosts } from "../api";
 import AddIcon from "@mui/icons-material/Add";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import ShareIcon from "@mui/icons-material/Share";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from '@mui/icons-material/Bookmark';
@@ -155,9 +154,6 @@ function PostFeed() {
             </div>
             <button className="like" onClick={()=>{onClickLike(index)}}>
               {item.isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-            </button>
-            <button className="comment">
-              <ChatBubbleOutlineIcon />
             </button>
             <button className="share">
               <ShareIcon />
