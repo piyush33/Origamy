@@ -155,9 +155,7 @@ function PostFeed() {
             <button className="like" onClick={()=>{onClickLike(index)}}>
               {item.isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
             </button>
-            <button className="share">
-              <ShareIcon />
-            </button>
+          
             <button className="save" onClick={()=>{onClickSave(index)}}>
               {item.isBookMarked ? <BookmarkIcon/> :<BookmarkBorderIcon />}
             </button>
