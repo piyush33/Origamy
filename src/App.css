@@ -45,6 +45,7 @@
 }
 .commentSection {
   margin-left: 35px;
+  padding-bottom: 10px;
 }
 .comments {
   border-top: 1px solid grey;
