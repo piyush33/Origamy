@@ -24,3 +24,17 @@ export const changeFeed = (feedData) => {
     payload: feedData,
   };
 };
+
+export const setImageUrl = (data) => {
+  return {
+    type: "SET_IMAGEURL",
+    payload: data,
+  };
+};
+
+export const setCaption = (data) => {
+  return {
+    type: "SET_CAPTION",
+    payload: data,
+  };
+};

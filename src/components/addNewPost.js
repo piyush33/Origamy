@@ -5,19 +5,20 @@ import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { changeFeed } from "../actions";
+import { changeFeed, setCaption, setImageUrl } from "../actions";
 
 function AddNewPost({ authData }) {
   const [openDialog, setOpenDialog] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
-  const [caption, setCaption] = useState("");
+  //   const [imageUrl, setImageUrl] = useState("");
+  //   const [caption, setCaption] = useState("");
   const dispatch = useDispatch();
   const reducerFeedData = useSelector((state) => state.feed.feedData);
+  const newData = useSelector((state) => state.newPost);
 
   const addNewPost = () => {
     let newPost = {
-      imageUrl: imageUrl,
-      caption: caption,
+      imageUrl: newData.imageUrl,
+      caption: newData.caption,
       user: {
         name: authData.user?.name,
         username: authData.user?.userName,
@@ -31,11 +32,12 @@ function AddNewPost({ authData }) {
       comments: [],
     };
     let newPostData = [newPost, ...reducerFeedData];
+
     dispatch(changeFeed(newPostData));
     // setFeedData(newPostData);
     setOpenDialog(false);
-    setCaption("");
-    setImageUrl("");
+    dispatch(setCaption(""));
+    dispatch(setImageUrl(""));
   };
   return (
     <>
@@ -59,9 +61,9 @@ function AddNewPost({ authData }) {
                 <input
                   type="text"
                   placeholder="imageUrl"
-                  value={imageUrl}
+                  value={newData.imageUrl}
                   onChange={(e) => {
-                    setImageUrl(e.target.value);
+                    dispatch(setImageUrl(e.target.value));
                   }}
                 />
               </div>
@@ -69,9 +71,9 @@ function AddNewPost({ authData }) {
                 <textarea
                   type="text"
                   placeholder="caption"
-                  value={caption}
+                  value={newData.caption}
                   onChange={(e) => {
-                    setCaption(e.target.value);
+                    dispatch(setCaption(e.target.value));
                   }}
                 />
               </div>

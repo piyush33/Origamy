@@ -7,8 +7,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import loggedReducer from "./reducers/isLogged";
 import { Provider } from "react-redux";
 import feedReducer from "./reducers/setFeed";
+import newPostReducer from "./reducers/newPost";
 
-const store = configureStore({ reducer: { auth: loggedReducer, feed: feedReducer } });
+const store = configureStore({ reducer: { auth: loggedReducer, feed: feedReducer, newPost: newPostReducer } });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
