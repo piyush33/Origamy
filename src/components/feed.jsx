@@ -9,7 +9,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate} from "react-router-dom";
-import { setFeed, signOut } from "../actions";
+import { changeFeed, setFeed, signOut } from "../actions";
 import AddNewPost from "./addNewPost";
 
 function PostFeed() {
@@ -24,19 +24,14 @@ function PostFeed() {
   useEffect(() => {
     getPosts().then((data) => {
       dispatch(setFeed(data));
-      setFeedData(reducerFeedData);
-      console.log("feedData",reducerFeedData)
     });
   },[]);
-
-  useEffect(()=>{
-    setFeedData(reducerFeedData);
-  },[reducerFeedData]);
   
   const onClickLike = (index)=>{
   
-  let post = feedData[index];
-    let newPost = {...post, isLiked: !post.isLiked}
+  let post = reducerFeedData[index];
+    let newPost = {...post, isLiked: !post.isLiked, likes: {...post.likes}}
+
 
     if(newPost.isLiked){
       newPost.likes.count+=1;
@@ -45,23 +40,25 @@ function PostFeed() {
       newPost.likes.count -=1;
     }
   
-  let newPostData = [...feedData]
+  let newPostData = [...reducerFeedData]
   newPostData[index]=newPost;
-  setFeedData(newPostData);
+  // setFeedData(newPostData);
+  dispatch(changeFeed(newPostData));
   }
 
   const onClickSave = (index)=>{
 
-      let post = feedData[index];
+      let post = reducerFeedData[index];
         let newPost = {...post, isBookMarked: !post.isBookMarked}
       
-      let newPostData = [...feedData];
+      let newPostData = [...reducerFeedData];
       newPostData[index]=newPost;
-      setFeedData(newPostData);
+      // setFeedData(newPostData);
+      dispatch(changeFeed(newPostData));
   }
 
   const onCommentSubmit =(index) =>{
-    let post =feedData[index];
+    let post =reducerFeedData[index];
      let postComments = post.comments
      let postNewComments= [...postComments, {
       user: {
@@ -74,9 +71,10 @@ function PostFeed() {
 
      let newPost = {...post, comments: postNewComments}
 
-     let newPostData = [...feedData];
+     let newPostData = [...reducerFeedData];
      newPostData[index]=newPost;
-     setFeedData(newPostData);
+    //  setFeedData(newPostData);
+    dispatch(changeFeed(newPostData));
      setComment("");
 
   }
@@ -99,7 +97,7 @@ function PostFeed() {
     
    <AddNewPost authData={authData}/>
       <div className="feedContainer">
-        {feedData.map((item, index) => (
+        {reducerFeedData.map((item, index) => (
           <div className="cardContainer">
             <div className="card">
               <img className="picture" src={item.imageUrl} alt="photo" />

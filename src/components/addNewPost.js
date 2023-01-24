@@ -31,7 +31,6 @@ function AddNewPost({ authData }) {
       comments: [],
     };
     let newPostData = [newPost, ...reducerFeedData];
-    console.log("newpost", newPostData);
     dispatch(changeFeed(newPostData));
     // setFeedData(newPostData);
     setOpenDialog(false);
