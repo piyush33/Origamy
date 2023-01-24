@@ -6,8 +6,9 @@ import reportWebVitals from "./reportWebVitals";
 import { configureStore } from "@reduxjs/toolkit";
 import loggedReducer from "./reducers/isLogged";
 import { Provider } from "react-redux";
+import feedReducer from "./reducers/setFeed";
 
-const store = configureStore({ reducer: { auth: loggedReducer } });
+const store = configureStore({ reducer: { auth: loggedReducer, feed: feedReducer } });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
